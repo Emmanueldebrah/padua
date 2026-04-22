@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebenezer Senior High School</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --accent: #f97316;
+            --bg: #ffffff;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #10b981 0%, #f97316 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            margin-right: 15px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding: 60px 20px;
+            background: #f9fafb;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+
+        /* Content Section */
+        .section {
+            padding: 60px 20px;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .section h3 {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .section ol, .section ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .programme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .programme-card {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .programme-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .news-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .news-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .news-card-content {
+            padding: 25px;
+        }
+
+        .news-date {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .news-card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .news-card p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .staff-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .staff-avatar {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .staff-info {
+            padding: 20px;
+        }
+
+        .staff-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .staff-position {
+            color: var(--primary);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .staff-dept {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f9fafb;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--text-light);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .contact-item {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .contact-item h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .contact-item p {
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+
+            .section h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">E</div>
+                <span>Ebenezer SHS</span>
+            </div>
+            <ul id="nav-menu">
+                <li><a onclick="showSection('home')" class="nav-link active">Home</a></li>
+                <li><a onclick="showSection('about')" class="nav-link">About</a></li>
+                <li><a onclick="showSection('academics')" class="nav-link">Academics</a></li>
+                <li><a onclick="showSection('admissions')" class="nav-link">Admissions</a></li>
+                <li><a onclick="showSection('news')" class="nav-link">News</a></li>
+                <li><a onclick="showSection('events')" class="nav-link">Events</a></li>
+                <li><a onclick="showSection('staff')" class="nav-link">Staff</a></li>
+                <li><a onclick="showSection('gallery')" class="nav-link">Gallery</a></li>
+                <li><a onclick="showSection('contact')" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <div id="home" class="section active">
+        <div class="hero">
+            <h1>Ebenezer Senior High School</h1>
+            <p>Excellence in Education Since 1941 • Dansoman, Accra</p>
+            <button class="btn btn-primary" onclick="showSection('admissions')">Apply Now</button>
+            <button class="btn btn-outline" onclick="showSection('about')">Learn More</button>
+        </div>
+
+        <div class="container">
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">2,578+</div>
+                    <div class="stat-label">Current Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">9,000+</div>
+                    <div class="stat-label">Alumni</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Awards Won</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">80+</div>
+                    <div class="stat-label">Years of Excellence</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Welcome to Ebenezer SHS</h2>
+            <p>Ebenezer Senior High School has been a beacon of educational excellence since its establishment in 1941 by Robert Teiko Aryee. Located in the vibrant community of Dansoman, Accra, our institution has consistently produced graduates who excel in academics, sports, and co-curricular activities.</p>
+            <p>Our commitment to holistic education, combined with state-of-the-art facilities and dedicated educators, ensures that every student receives the best possible preparation for their future endeavors.</p>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="section">
+        <div class="container">
+            <h2>About Ebenezer SHS</h2>
+            
+            <h3>Our History</h3>
+            <p>Ebenezer Senior High School was founded in 1941 by Robert Teiko Aryee, a visionary educator committed to providing quality secondary education to students in Dansoman and surrounding communities. Over eight decades, the school has grown from humble beginnings to become one of the most respected educational institutions in Ghana.</p>
+
+            <h3>Our Mission</h3>
+            <p>To provide quality, inclusive, and innovative education that develops well-rounded individuals equipped with knowledge, skills, and values necessary to contribute meaningfully to society and compete globally.</p>
+
+            <h3>Our Vision</h3>
+            <p>To be a leading institution of excellence in secondary education, recognized for academic achievement, character development, and the production of responsible citizens and leaders.</p>
+
+            <h3>Our Motto</h3>
+            <p><strong>"Excellence Through Dedication"</strong></p>
+
+            <h3>Core Values</h3>
+            <ul>
+                <li>Integrity - Upholding honesty and moral principles</li>
+                <li>Excellence - Striving for the highest standards in all endeavors</li>
+                <li>Respect - Valuing diversity and treating all with dignity</li>
+                <li>Responsibility - Taking ownership of our actions and contributions</li>
+                <li>Innovation - Embracing creative thinking and continuous improvement</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Academics Section -->
+    <div id="academics" class="section">
+        <div class="container">
+            <h2>Academic Programmes</h2>
+            <p>Ebenezer SHS offers six comprehensive academic programmes designed to cater to diverse student interests and career aspirations:</p>
+
+            <div class="programme-grid">
+                <div class="programme-card">
+                    <h4>General Science</h4>
+                    <p>Focuses on Physics, Chemistry, and Biology. Ideal for students pursuing careers in medicine, engineering, and natural sciences.</p>
+                </div>
+                <div class="programme-card">
+                    <h4>Visual Arts</h4>
+                    <p>Emphasizes creative expression through painting, sculpture, and design. Perfect for aspiring artists and designers.</p>
+                </div>
+                <div class="programme-card">
+                    <h4>Home Economics</h4>
+                    <p>Covers nutrition, hospitality management, and consumer studies. Great for careers in hospitality and home management.</p>
+                </div>
+                <div class="programme-card">
+                    <h4>Business</h4>
+                    <p>Prepares students for commerce and entrepreneurship with courses in accounting, economics, and business management.</p>
+                </div>
+                <div class="programme-card">
+                    <h4>Agriculture Science</h4>
+                    <p>Combines theoretical knowledge with practical farming techniques. Suitable for agricultural careers and agribusiness.</p>
+                </div>
+                <div class="programme-card">
+                    <h4>General Arts</h4>
+                    <p>Focuses on humanities including literature, history, and social studies. Ideal for careers in law, journalism, and education.</p>
+                </div>
+            </div>
+
+            <h3>Facilities</h3>
+            <p>Our school boasts modern facilities including:</p>
+            <ul>
+                <li>State-of-the-art science laboratories</li>
+                <li>Ultra-modern library (commissioned by MTN Ghana Foundation)</li>
+                <li>Computer labs with internet connectivity</li>
+                <li>Sports facilities and athletic grounds</li>
+                <li>Auditorium for events and performances</li>
+                <li>Well-equipped classrooms with learning resources</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Admissions Section -->
+    <div id="admissions" class="section">
+        <div class="container">
+            <h2>Admissions</h2>
+            
+            <h3>Admission Process</h3>
+            <p>Our admission process is transparent and merit-based. Follow these steps:</p>
+            <ol>
+                <li><strong>Application:</strong> Submit your application form with required documents</li>
+                <li><strong>Entrance Examination:</strong> Take our entrance examination in English, Mathematics, and Science</li>
+                <li><strong>Interview:</strong> Participate in a brief interview with our admissions team</li>
+                <li><strong>Selection:</strong> Successful candidates are notified of admission</li>
+                <li><strong>Registration:</strong> Complete registration and pay fees to secure your place</li>
+            </ol>
+
+            <h3>Requirements</h3>
+            <ul>
+                <li>Birth certificate or national ID</li>
+                <li>Primary/Junior High School leaving certificate</li>
+                <li>Recent passport-sized photograph (4x6)</li>
+                <li>Parent/Guardian contact information</li>
+                <li>Medical report (optional but recommended)</li>
+            </ul>
+
+            <h3>Admission Inquiry Form</h3>
+            <form onsubmit="handleAdmissionForm(event)">
+                <div class="form-group">
+                    <label for="student-name">Full Name *</label>
+                    <input type="text" id="student-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-email">Email Address *</label>
+                    <input type="email" id="student-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-phone">Phone Number *</label>
+                    <input type="tel" id="student-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-programme">Preferred Programme *</label>
+                    <select id="student-programme" required>
+                        <option value="">Select a programme</option>
+                        <option value="General Science">General Science</option>
+                        <option value="Visual Arts">Visual Arts</option>
+                        <option value="Home Economics">Home Economics</option>
+                        <option value="Business">Business</option>
+                        <option value="Agriculture Science">Agriculture Science</option>
+                        <option value="General Arts">General Arts</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="student-message">Message</label>
+                    <textarea id="student-message" placeholder="Tell us about yourself..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <div id="news" class="section">
+        <div class="container">
+            <h2>News & Announcements</h2>
+
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-card-content">
+                        <div class="news-date">April 15, 2024</div>
+                        <h4>MTN Commissions Ultra-Modern Library</h4>
+                        <p>MTN Ghana Foundation commissioned an ultra-modern multi-purpose library for Ebenezer SHS. The library is equipped with modern facilities and resources to enhance learning for students and the community.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-content">
+                        <div class="news-date">March 20, 2024</div>
+                        <h4>School Celebrates 80th Anniversary</h4>
+                        <p>Ebenezer SHS marked its 80th anniversary with a grand celebration featuring speeches, performances, and recognition of outstanding students and staff members.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-content">
+                        <div class="news-date">February 10, 2024</div>
+                        <h4>New Science Laboratory Opened</h4>
+                        <p>The newly renovated science laboratory has been equipped with modern equipment to provide students with hands-on learning experiences in biology, chemistry, and physics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events Section -->
+    <div id="events" class="section">
+        <div class="container">
+            <h2>Upcoming Events</h2>
+
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-card-content">
+                        <div class="news-date">May 20, 2024</div>
+                        <h4>Speech and Prize-Giving Day</h4>
+                        <p>Annual celebration of academic and co-curricular achievements. Students will be recognized for their outstanding performance in academics, sports, and other activities. Venue: School Auditorium.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-content">
+                        <div class="news-date">June 5, 2024</div>
+                        <h4>Sports Day</h4>
+                        <p>Inter-house athletic competition featuring track and field events, relays, and team sports. All students are encouraged to participate and showcase their athletic talents. Venue: School Sports Field.</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-card-content">
+                        <div class="news-date">June 20, 2024</div>
+                        <h4>Career Fair</h4>
+                        <p>Meet professionals from various fields and learn about different career paths. Industry experts will share insights and advice to help students make informed career choices. Venue: School Grounds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Section -->
+    <div id="staff" class="section">
+        <div class="container">
+            <h2>Staff Directory</h2>
+
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-avatar">SM</div>
+                    <div class="staff-info">
+                        <div class="staff-name">Dr. Samuel Mensah</div>
+                        <div class="staff-position">Headmaster</div>
+                        <div class="staff-dept">Administration</div>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">AO</div>
+                    <div class="staff-info">
+                        <div class="staff-name">Mrs. Abigail Owusu</div>
+                        <div class="staff-position">Vice Headmaster (Academic)</div>
+                        <div class="staff-dept">Administration</div>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">JB</div>
+                    <div class="staff-info">
+                        <div class="staff-name">Mr. Joseph Afful Bedu</div>
+                        <div class="staff-position">Head of Science Department</div>
+                        <div class="staff-dept">Science</div>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">GY</div>
+                    <div class="staff-info">
+                        <div class="staff-name">Ms. Grace Yeboah</div>
+                        <div class="staff-position">Head of Languages</div>
+                        <div class="staff-dept">Languages</div>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">KB</div>
+                    <div class="staff-info">
+                        <div class="staff-name">Mr. Kwame Boateng</div>
+                        <div class="staff-position">Head of Sports</div>
+                        <div class="staff-dept">Physical Education</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div id="gallery" class="section">
+        <div class="container">
+            <h2>Photo Gallery</h2>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">🏫 Campus Main Gate</div>
+                <div class="gallery-item">📚 Library Building</div>
+                <div class="gallery-item">🏃 Annual Sports Day</div>
+                <div class="gallery-item">🎖️ Prize-Giving Ceremony</div>
+                <div class="gallery-item">🎭 Drama Club Performance</div>
+                <div class="gallery-item">🎵 Music Ensemble</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="section">
+        <div class="container">
+            <h2>Contact Us</h2>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>📍 Location</h4>
+                    <p>Ebenezer Senior High School<br>Dansoman, Accra<br>Ghana</p>
+                </div>
+                <div class="contact-item">
+                    <h4>📞 Phone</h4>
+                    <p>+233 30 298 6227<br>+233 55 965 1014</p>
+                </div>
+                <div class="contact-item">
+                    <h4>✉️ Email</h4>
+                    <p>info@ebenezer-shs.edu.gh<br>admissions@ebenezer-shs.edu.gh</p>
+                </div>
+            </div>
+
+            <h3>Send us a Message</h3>
+            <form onsubmit="handleContactForm(event)" style="max-width: 600px;">
+                <div class="form-group">
+                    <label for="contact-name">Full Name *</label>
+                    <input type="text" id="contact-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email Address *</label>
+                    <input type="email" id="contact-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-subject">Subject *</label>
+                    <input type="text" id="contact-subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-message">Message *</label>
+                    <textarea id="contact-message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ebenezer Senior High School. All rights reserved.</p>
+            <p>Excellence Through Dedication</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Remove active class from all nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+
+            // Add active class to clicked nav link
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function handleAdmissionForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('student-name').value;
+            const email = document.getElementById('student-email').value;
+            const programme = document.getElementById('student-programme').value;
+            alert(`Thank you for your inquiry, ${name}! We will contact you at ${email} regarding the ${programme} programme.`);
+            event.target.reset();
+        }
+
+        function handleContactForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            alert(`Thank you for your message, ${name}! We will get back to you soon.`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
